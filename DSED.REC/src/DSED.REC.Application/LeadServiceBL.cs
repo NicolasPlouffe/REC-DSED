@@ -1,5 +1,9 @@
-﻿namespace DSED.REC.Application;
+﻿using System.Diagnostics.CodeAnalysis;
+using FluentValidation;
+using DSED.REC.Entity;
 
-public class LeadServiceBL
+namespace DSED.REC.Application;
+
+public class LeadServiceBL 
 {
 }
