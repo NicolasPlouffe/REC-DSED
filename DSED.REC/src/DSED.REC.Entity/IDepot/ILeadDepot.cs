@@ -1,7 +1,7 @@
 using DSED.REC.Entity;
 namespace DSED.REC.Entity.IDepot;
 
-public interface ILead
+public interface ILeadDepot
 {
     Task AddLeadAsync(LeadEntity lead);
     Task <LeadEntity?>GetLeadByIdAsync(Guid leadId);

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DSED.REC.DataAccesLayer;
 
-public class LeadDepot : ILead
+public class LeadDepotDepot : ILeadDepot
 {
     private readonly ApplicationDbContext _context;
 
-    public LeadDepot(ApplicationDbContext context) 
+    public LeadDepotDepot(ApplicationDbContext context) 
         => _context = context ?? throw new ArgumentNullException(nameof(context));
     
         
