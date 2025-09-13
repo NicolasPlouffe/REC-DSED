@@ -19,7 +19,7 @@ public class LeadDTO
 
     public LeadDTO(LeadEntity lead)
     {
-        this.Id = lead.ID;
+        this.Id = lead.Id;
         this.FirstName = lead.FirstName;
         this.LastName = lead.LastName;
         this.Email = lead.Email;

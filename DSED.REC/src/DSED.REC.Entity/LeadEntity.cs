@@ -4,7 +4,7 @@ public class LeadEntity
 {
     #region Properties
     
-    public Guid ID { get; set; }
+    public Guid Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
@@ -19,7 +19,7 @@ public class LeadEntity
 
     public LeadEntity(Guid id, string firstName, string lastName, string email)
     {
-        ID = id;
+        Id = id;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
@@ -36,7 +36,7 @@ public class LeadEntity
 
     public override string ToString()
     {
-        return $"Lead ID: {ID}" +
+        return $"Lead Id: {Id}" +
                $"First name : {FirstName}" +
                $"Last name : {LastName}" +
                $"Email : {Email}";
