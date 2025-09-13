@@ -4,9 +4,9 @@ using DSED.REC.Entity;
 
 namespace DSED.REC.DataAccesLayer;
 
-public class ApplicationDbContexte : DbContext
+public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContexte(DbContextOptions<ApplicationDbContexte> options) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
         ChangeTracker.LazyLoadingEnabled = false;
     }

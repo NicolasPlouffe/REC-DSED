@@ -28,7 +28,7 @@ public class LeadDTO
 
     #region public methods
 
-    LeadEntity ToEntity()
+    public LeadEntity ToEntity()
     {
         LeadEntity lead = new LeadEntity(
             this.Id,
