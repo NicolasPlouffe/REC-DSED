@@ -1,0 +1,24 @@
+services:
+  sqlserver:
+    extends:
+      file: mssql.yaml
+      service: sqlserver_landing_page
+    networks:
+      - landing_page_network
+  rabbitmq:
+    extends:
+      file: rabbitmq.yaml
+      service: rabbitmq_messaging
+    networks:
+      - landing_page_network
+
+volumes:
+  postgresql_landing_page_data:
+  sqlserver_landing_page:
+  rabbitmq_messaging_data:
+  rabbitmq_messaging_logs:
+
+networks:
+  landing_page_network:
+    driver: bridge
+

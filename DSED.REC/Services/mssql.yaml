@@ -1,0 +1,22 @@
+services:
+  sqlserver_landing_page:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_landing_page
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Solution1Pass123!  # Utilisez MSSQL_SA_PASSWORD
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_landing_page:/var/opt/mssql
+    networks:
+      - landing_page_network
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Solution1Pass123!' -C -Q 'SELECT 1' || exit 1"]
+      interval: 30s
+      retries: 5
+      start_period: 60s
+      timeout: 30s
+

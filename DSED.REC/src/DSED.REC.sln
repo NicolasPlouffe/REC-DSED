@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.WebApp", "DSED.REC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Application", "DSED.REC.Application\DSED.REC.Application.csproj", "{E5CCEB0E-C148-4A6A-8834-8F33243E8EEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.ConsoleApp", "DSED.REC.ConsoleApp\DSED.REC.ConsoleApp.csproj", "{CA070892-70AC-4DA3-9B2F-6754C301E4F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{E5CCEB0E-C148-4A6A-8834-8F33243E8EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5CCEB0E-C148-4A6A-8834-8F33243E8EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5CCEB0E-C148-4A6A-8834-8F33243E8EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA070892-70AC-4DA3-9B2F-6754C301E4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA070892-70AC-4DA3-9B2F-6754C301E4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA070892-70AC-4DA3-9B2F-6754C301E4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA070892-70AC-4DA3-9B2F-6754C301E4F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
