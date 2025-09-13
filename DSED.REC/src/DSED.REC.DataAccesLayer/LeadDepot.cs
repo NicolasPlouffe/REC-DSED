@@ -32,9 +32,18 @@ public class LeadDepot : ILead
         return dto?.ToEntity();
     }
 
-    public Task UpdateLeadAsync(LeadEntity lead)
+    public async Task UpdateLeadAsync(LeadEntity lead)
     {
         if (_context is null)  throw new ArgumentNullException(nameof(_context));
         if (lead is null) throw new ArgumentNullException(nameof(lead));
+        
+        var existingDto = await _context.LeadsDtos.FindAsync(lead.Id);
+        if (existingDto is null) throw new ArgumentNullException(nameof(existingDto));
+
+        existingDto.FirstName = lead.FirstName;
+        existingDto.LastName = lead.LastName;
+        existingDto.Email = lead.Email;
+
+        await _context.SaveChangesAsync();
     }
 }
