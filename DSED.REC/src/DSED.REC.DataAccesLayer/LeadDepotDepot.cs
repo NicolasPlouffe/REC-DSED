@@ -32,6 +32,16 @@ public class LeadDepotDepot : ILeadDepot
         return dto?.ToEntity();
     }
 
+    public async Task<List<LeadEntity>> GetAllLeadsAsync()
+    {
+        if (_context is null)  throw new ArgumentNullException(nameof(_context));
+        
+        var dtos = await _context.LeadsDtos.ToListAsync();
+        var leads = dtos.Select(dto => dto.ToEntity()).ToList();
+
+        return leads;
+    }
+
     public async Task UpdateLeadAsync(LeadEntity lead)
     {
         if (_context is null)  throw new ArgumentNullException(nameof(_context));
