@@ -8,4 +8,25 @@
         <RootNamespace>DSED.ConsoleApp</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DSED.REC.Application\DSED.REC.Application.csproj" />
+      <ProjectReference Include="..\DSED.REC.DataAccesLayer\DSED.REC.DataAccesLayer.csproj" />
+      <ProjectReference Include="..\DSED.REC.Entity\DSED.REC.Entity.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Include="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+
 </Project>

@@ -1,4 +1,5 @@
 
+
 use master;
 IF EXISTS (SELECT name FROM sys.databases WHERE name = 'LeadsCRM')
 BEGIN

@@ -11,7 +11,6 @@ public class LeadDepotDepot : ILeadDepot
     public LeadDepotDepot(ApplicationDbContext context) 
         => _context = context ?? throw new ArgumentNullException(nameof(context));
     
-        
     public async Task AddLeadAsync(LeadEntity lead)
     {
         if (_context is null)  throw new ArgumentNullException(nameof(_context));

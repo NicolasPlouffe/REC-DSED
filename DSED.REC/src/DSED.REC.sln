@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Application", "DSE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.ConsoleApp", "DSED.REC.ConsoleApp\DSED.REC.ConsoleApp.csproj", "{CA070892-70AC-4DA3-9B2F-6754C301E4F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Consumer-FileWriter", "DSED.REC.Consumer-FileWriter\DSED.REC.Consumer-FileWriter.csproj", "{83CAE802-24DD-4796-A48E-4723E38ADDC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Consumer-Journalisation", "DSED.REC.Consumer-Journalisation\DSED.REC.Consumer-Journalisation.csproj", "{83CAE802-24DD-4796-A48E-4723E38ADDC2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Consumer-Db", "DSED.REC.Consumer-Db\DSED.REC.Consumer-Db.csproj", "{A7650E35-6880-44B6-BAF0-D09A9DD91A73}"
 EndProject

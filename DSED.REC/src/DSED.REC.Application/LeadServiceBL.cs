@@ -4,62 +4,62 @@ using DSED.REC.Entity.IDepot;
 
 namespace DSED.REC.Application;
 
-public class LeadServiceBL : IDisposable
+public class LeadServiceBL : IDisposable 
 {
     #region Properties
-    private readonly ILeadDepot  _leadDepot;
+    private readonly ILeadDepot _leadDepot;
     private readonly IValidator<LeadEntity> _validator;
     #endregion
     
     #region CONSTRUCTORS
-
     public LeadServiceBL(ILeadDepot leadDepot, IValidator<LeadEntity> validator)
     {
-        if(leadDepot is null) throw new ArgumentNullException(nameof(leadDepot));
-        if(validator is null) throw new ArgumentNullException(nameof(validator));
-        
-        _leadDepot = leadDepot;
-        _validator = validator;
+        _leadDepot = leadDepot ?? throw new ArgumentNullException(nameof(leadDepot));
+        _validator = validator ?? throw new ArgumentNullException(nameof(validator));
     }
     #endregion
 
     #region CRUD
-
-    public async Task<LeadEntity> CreateLead(LeadEntity p_lead)
+    public async Task<LeadEntity> CreateLead(LeadEntity lead)
     {
-        if (p_lead is null) throw new ArgumentNullException(nameof(p_lead));
-        if (p_lead.Id == Guid.Empty) p_lead.Id = Guid.NewGuid();
+        if (lead is null) throw new ArgumentNullException(nameof(lead));
+        if (lead.Id == Guid.Empty) lead.Id = Guid.NewGuid();
         
-        var validationResult = await _validator.ValidateAsync(p_lead);
+        var validationResult = await _validator.ValidateAsync(lead);
         if (!validationResult.IsValid) throw new ValidationException(validationResult.Errors);
         
-        await _leadDepot.AddLeadAsync(p_lead);
-        return p_lead;
+        await _leadDepot.AddLeadAsync(lead);
+        return lead;
     }
 
-    public async Task<LeadEntity?> GetLeadById(Guid p_leadId)
+    public async Task<LeadEntity?> GetLeadById(Guid leadId)
     {
-        if (p_leadId != Guid.Empty) throw new ArgumentException(nameof(p_leadId));
+        if (leadId == Guid.Empty) throw new ArgumentException(nameof(leadId)); 
         
-        return await _leadDepot.GetLeadByIdAsync(p_leadId);
+        return await _leadDepot.GetLeadByIdAsync(leadId);
     }
 
-    public async Task UpdateLead(LeadEntity p_lead)
+    public async Task<List<LeadEntity>> GetAllLeadsAsync()
     {
-        if (p_lead is null) throw new ArgumentNullException(nameof(p_lead));
-        if (p_lead.Id == Guid.Empty) p_lead.Id = Guid.NewGuid();
-        
-        var existingLead = await _leadDepot.GetLeadByIdAsync(p_lead.Id);
-        if (existingLead is null) throw new ArgumentException(nameof(p_lead));
-        
-        await _validator.ValidateAsync(p_lead);
-        await _leadDepot.UpdateLeadAsync(p_lead);
+        return await _leadDepot.GetAllLeadsAsync();
     }
     
+    public async Task UpdateLead(LeadEntity lead)
+    {
+        if (lead is null) throw new ArgumentNullException(nameof(lead));
+        if (lead.Id == Guid.Empty) throw new ArgumentException("Lead ID cannot be empty for update", nameof(lead));
+        
+        var existingLead = await _leadDepot.GetLeadByIdAsync(lead.Id);
+        if (existingLead is null) throw new ArgumentException("Lead not found", nameof(lead));
+        
+        var validationResult = await _validator.ValidateAsync(lead);
+        if (!validationResult.IsValid) throw new ValidationException(validationResult.Errors);
+        
+        await _leadDepot.UpdateLeadAsync(lead);
+    }
     #endregion CRUD
     
     public void Dispose()
     {
-        throw new NotImplementedException();
     }
 }
