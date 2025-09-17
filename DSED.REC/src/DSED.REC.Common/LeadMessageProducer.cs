@@ -11,7 +11,7 @@ namespace DSED.REC.Common;
 public class LeadMessageProducer
 {
     public string ExchangeName { get; } = "Lead";
-    public string ApplicationName { get;} = "Lead";
+    public string ApplicationName { get;} = "DSED.REC.LeadCRM";
 
     private readonly ConnectionFactory _factory;
     
@@ -22,22 +22,46 @@ public class LeadMessageProducer
         _factory = new ConnectionFactory() { HostName = "localhost" };
     }
 
-    public void Publish(LeadEntity lead, string httpVerb)
+    public void PublishCreate(LeadEntity lead)
+    {
+        Publish(lead,"PostLead","create.lead.api");
+    }
+
+    public void PublishUpdate(LeadEntity lead)
+    {
+        Publish(lead,"PutLead","update.lead.api");
+    }
+    
+    public void Publish(LeadEntity lead, string httpVerb, string routingKey)
     {
         string json = JsonSerializer.Serialize(lead);
-        
+        byte[] dataBytes = Encoding.UTF8.GetBytes(json);
         var enveloppe = new MessageEnveloppe
         {
             HttpVerb = httpVerb,
-            DatasEntityEncoded = Encoding.UTF8.GetBytes(json), 
+            DatasEntityEncoded = dataBytes, 
             TimeCreation = DateTime.UtcNow,
             EnityType = nameof(LeadEntity),
-            Application = "DSED.REC.LeadCRM"
+            Application = ApplicationName
         };
         
         string jsonEnveloppe = JsonSerializer.Serialize(enveloppe);
         var body = Encoding.UTF8.GetBytes(jsonEnveloppe);
-        
+
+        using (IConnection connection = _factory.CreateConnection())
+        using (IModel channel = connection.CreateModel())
+        {
+            channel.ExchangeDeclare(
+                exchange: ExchangeName,
+                type: "topic", 
+                durable: true,
+                autoDelete: false);
+            
+            channel.BasicPublish(
+                exchange: ExchangeName ,
+                routingKey: routingKey,
+                basicProperties: null,
+                body: body);
+        }
     }
-    
 }
