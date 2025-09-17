@@ -74,7 +74,33 @@ public class LeadController : ControllerBase
     #endregion Get
     
     #region Post
-    
+
+    [HttpPost]
+    [ProducesResponseType(201)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(500)]
+    public async Task<ActionResult<LeadEntity>> CreateLead([FromBody] LeadEntity lead)
+    {
+        if (lead is null)
+            return BadRequest("Lead cannot be null");
+
+        try
+        {
+            var createdLead = await _leadServiceBL.CreateLead(lead);
+            return CreatedAtAction(nameof(GetLeadById), 
+                new { id = createdLead.Id }, 
+                createdLead);
+        }
+        catch (ValidationException ex)
+        {
+            return BadRequest(ex.Errors);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
+
     #endregion Post
 
     #region Put
