@@ -6,6 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+	
+
     <ItemGroup>
       <ProjectReference Include="..\DSED.REC.Application\DSED.REC.Application.csproj" />
       <ProjectReference Include="..\DSED.REC.DataAccesLayer\DSED.REC.DataAccesLayer.csproj" />

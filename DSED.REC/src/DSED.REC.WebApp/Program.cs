@@ -1,5 +1,7 @@
-using DSED.REC.Application;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.SqlServer;
+
+using DSED.REC.Application;
 using DSED.REC.DataAccesLayer;
 using DSED.REC.Entity;
 using DSED.REC.Entity.IDepot;
@@ -16,9 +18,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 builder.Services.AddScoped<ILeadDepot, LeadDepotDepot>();
 builder.Services.AddScoped<IValidator<LeadEntity>, LeadValidator>();
 builder.Services.AddScoped<LeadServiceBL>();
-/*
-builder.Services.AddScoped<SignalR>();
-*/
+
+builder.Services.AddSignalR();
 
 builder.Services.AddControllers();
 // Pour Postman
@@ -33,14 +34,26 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+/*if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}*/
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+
 // pour permettre 
-app.UseCors();
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -52,6 +65,8 @@ app.UseRouting();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllers();
 // app.MapHub<LeadStatsHub>("/LeadHub"); 
 
 app.Run();

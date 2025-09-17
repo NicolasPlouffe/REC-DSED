@@ -11,7 +11,7 @@ using DSED.REC.WebApp.Models;
 namespace DSED.REC.WebApp.Controllers;
 
 [ApiController]
-[Route("apié[controller]")]
+[Route("api/[controller]")]
 public class LeadController : ControllerBase
 {
     private readonly ILeadDepot _leadDepot;
