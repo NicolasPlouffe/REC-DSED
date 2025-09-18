@@ -6,8 +6,9 @@ using DSED.REC.Common;
 using DSED.REC.DataAccesLayer;
 using DSED.REC.Entity;
 using DSED.REC.Entity.IDepot;
-
+using DSED.REC.WebApp.Hubs;
 using DSED.REC.WebApp.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DSED.REC.WebApp.Controllers;
 
@@ -18,14 +19,16 @@ public class LeadController : ControllerBase
     private readonly ILeadDepot _leadDepot;
     private readonly LeadServiceBL _leadServiceBL;
     private readonly LeadMessageProducer _leadMessageProducer;
+    private readonly IHubContext<DashBoardHub> _hubContext;
     
     #region Constructor
 
-    public LeadController(ILeadDepot leadDepot,LeadServiceBL leadServiceBL)
+    public LeadController(ILeadDepot leadDepot,LeadServiceBL leadServiceBL, IHubContext<DashBoardHub> hubContext)
     {
         _leadDepot = leadDepot ?? throw new ArgumentNullException(nameof(leadDepot));
         _leadServiceBL = leadServiceBL ?? throw new ArgumentNullException(nameof(leadServiceBL));
         _leadMessageProducer = new LeadMessageProducer("lead-exchange", "DSED.REC.LeadCRM");
+        _hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
     }
     #endregion
 
