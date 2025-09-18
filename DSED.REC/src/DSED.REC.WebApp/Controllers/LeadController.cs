@@ -17,16 +17,14 @@ namespace DSED.REC.WebApp.Controllers;
 public class LeadController : ControllerBase
 {
     private readonly ILeadDepot _leadDepot;
-    private readonly LeadServiceBL _leadServiceBL;
     private readonly LeadMessageProducer _leadMessageProducer;
     private readonly IHubContext<DashBoardHub> _hubContext;
     
     #region Constructor
 
-    public LeadController(ILeadDepot leadDepot,LeadServiceBL leadServiceBL, IHubContext<DashBoardHub> hubContext)
+    public LeadController(ILeadDepot leadDepot, IHubContext<DashBoardHub> hubContext)
     {
         _leadDepot = leadDepot ?? throw new ArgumentNullException(nameof(leadDepot));
-        _leadServiceBL = leadServiceBL ?? throw new ArgumentNullException(nameof(leadServiceBL));
         _leadMessageProducer = new LeadMessageProducer("lead-exchange", "DSED.REC.LeadCRM");
         _hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
     }
