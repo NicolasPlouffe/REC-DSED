@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Text.Json;
-using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using DSED.REC.DataAccesLayer;
 using DSED.REC.Entity;
 
 
@@ -13,7 +11,7 @@ namespace DSED.REC.Consumer_Journalisation
     class Program
     {
         private const string ExchangeName = "lead-exchange";
-        private const string QueueName    = "lead-db-operations";
+        private const string QueueName    = "lead-journalization";
         private const string LogDirectory = "LeadJournaux";
 
         static void Main()
@@ -40,20 +38,19 @@ namespace DSED.REC.Consumer_Journalisation
             {
                 try
                 {
-                    var json    = Encoding.UTF8.GetString(ea.Body.ToArray());
-                    var lead    = JsonSerializer.Deserialize<LeadEntity>(json);
-                    var routing = ea.RoutingKey;
+                    var body    = ea.Body.ToArray();
+                    var message = Encoding.UTF8.GetString(body);
 
-                    using var scope      = services.CreateScope();
-                    var leadService      = scope.ServiceProvider.GetRequiredService<LeadServiceBL>();
+                    var parts = ea.RoutingKey.Split('.');
+                    var verb  = parts[0];
 
-                    if (routing == "create.lead.api" && lead != null)
-                        leadService.CreateLead(lead).GetAwaiter().GetResult();
-                    else if (routing == "update.lead.api" && lead != null)
-                        leadService.UpdateLead(lead).GetAwaiter().GetResult();
-                    else
-                        throw new InvalidOperationException($"Routing key invalide : {routing}");
+                    var timestamp = DateTime.Now;
+                    var fileName  = $"{timestamp:yyyy-MM-dd--HH-mm-ss}-{verb}.json";
+                    var filePath  = Path.Combine(LogDirectory, fileName);
 
+                    File.WriteAllText(filePath, message, Encoding.UTF8);
+
+                    Console.WriteLine($"Message journalisé : {fileName}");
                     channel.BasicAck(ea.DeliveryTag, false);
                 }
                 catch (Exception ex)
