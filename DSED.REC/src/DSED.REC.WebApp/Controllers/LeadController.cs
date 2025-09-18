@@ -103,6 +103,7 @@ public class LeadController : ControllerBase
             return BadRequest("Lead ID cannot be empty");
         }
         _leadMessageProducer.PublishUpdate(lead);
+        await _hubContext.Clients.All.SendAsync("ReceiveUpdate","update" ,lead);
         return NoContent();
     }
     
