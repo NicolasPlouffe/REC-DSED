@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DSED.REC.Application\DSED.REC.Application.csproj" />
+      <ProjectReference Include="..\DSED.REC.Common-waste\DSED.REC.Common-waste.csproj" />
       <ProjectReference Include="..\DSED.REC.DataAccesLayer\DSED.REC.DataAccesLayer.csproj" />
       <ProjectReference Include="..\DSED.REC.Entity\DSED.REC.Entity.csproj" />
     </ItemGroup>

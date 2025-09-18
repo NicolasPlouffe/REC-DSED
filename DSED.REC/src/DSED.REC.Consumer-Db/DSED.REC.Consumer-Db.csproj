@@ -8,4 +8,18 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="12.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
+      <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DSED.REC.Application\DSED.REC.Application.csproj" />
+      <ProjectReference Include="..\DSED.REC.Common-waste\DSED.REC.Common-waste.csproj" />
+      <ProjectReference Include="..\DSED.REC.DataAccesLayer\DSED.REC.DataAccesLayer.csproj" />
+      <ProjectReference Include="..\DSED.REC.Entity\DSED.REC.Entity.csproj" />
+    </ItemGroup>
+
 </Project>

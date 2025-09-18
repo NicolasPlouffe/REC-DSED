@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Consumer-Journalis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Consumer-Db", "DSED.REC.Consumer-Db\DSED.REC.Consumer-Db.csproj", "{A7650E35-6880-44B6-BAF0-D09A9DD91A73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Common", "DSED.REC.Common\DSED.REC.Common.csproj", "{F94B56AD-1CF0-4EC2-85F6-9872E98F24A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSED.REC.Common-waste", "DSED.REC.Common-waste\DSED.REC.Common-waste.csproj", "{F94B56AD-1CF0-4EC2-85F6-9872E98F24A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
